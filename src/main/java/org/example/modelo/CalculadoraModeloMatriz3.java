@@ -77,4 +77,24 @@ public class CalculadoraModeloMatriz3 {
                            "("+G3+"   "+H3+"   "+I3+")");
     }
 
+    public static void Determinante3 (double A,double B,double C,double D,double E,double F,double G,double H,double I){
+        double determinante = det_3(A,B,C,D,E,F,G,H,I);
+
+        System.out.print("\n| "+A+"   "+B+"   "+C+"|\n");
+        System.out.print("\n| "+D+"   "+E+"   "+F+"|= "+determinante+"\n");
+        System.out.print("\n| "+G+"   "+H+"   "+I+"|\n");
+    } //Función para calcular el determinante de una matriz 3x3
+
+
+
+
+
+
+    public static double det_3(double A, double B, double C, double D, double E, double F, double G, double H, double I){
+        double lin1 = (A*E*I)+(B*F*G)+(D*H*C);
+        double lin2 = (C*E*G)+(B*D*I)+(F*H*A);
+        double ResultadoFinal_3 = lin1-lin2;
+        return ResultadoFinal_3;
+    } //Fórmula para resolver determinantes de orden 3 (dimensión 3x3)
+
 } //Fin de la clase CalculadoraModeloMatriz3

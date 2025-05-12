@@ -47,5 +47,20 @@ public class CalculadoraModeloMatriz2 {
                            "("+C3+"   "+D3+")");
     }
 
+    public static void Determinante3 (double A,double B,double C,double D){
+        double determinante = det_2(A,B,C,D);
+
+        System.out.print("\n| "+A+"   "+B+" |\n");
+        System.out.print("\n|               |" + determinante + "\n");
+        System.out.print("\n| "+C+"   "+D+" |\n");
+    } //Función para calcular el determinante de una matriz 3x3
+
+
+
+    public static double det_2(double A, double B, double C, double D){
+        double ResultadoFinal_2 = (A*D)-(B*C);
+        return ResultadoFinal_2;
+    } //Fórmula para resolver determinantes de orden 2 (dimensión 2x2)
+
 
 } //Fin de la clase CalculadoraModeloMatriz2
