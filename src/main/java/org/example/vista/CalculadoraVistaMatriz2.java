@@ -1,4 +1,6 @@
 package org.example.vista;
 
-public class CalculadoraVistaMatriz2 {
+import javax.swing.*;
+
+public class CalculadoraVistaMatriz2 extends JFrame {
 }
