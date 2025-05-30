@@ -8,25 +8,32 @@ public class CalculadoraVistaBasica extends JFrame{
     public CalculadoraVistaBasica(){
 
         // FRAMES
-
         JFrame frameBasico = new JFrame("Calculadora Básica");
         frameBasico.setSize(400, 400);
         frameBasico.setLocationRelativeTo(null);
         frameBasico.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frameBasico.setVisible(true);
 
-        // PANELES
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        // PANELES
+        JPanel panel1 = new JPanel();
+        panel1.setLayout(new BoxLayout(panel1, BoxLayout.Y_AXIS));
 
         JPanel panel2 = new JPanel(new GridLayout(6, 4, 5,5));
 
 
+        // CREACIÓN DE LA PANTALLA DONDE SE REFLEJAN LAS OPERACIONES
+        JTextField pantalla = new JTextField();
+        pantalla.setEditable(false); // No se puede editar directamente
+        pantalla.setHorizontalAlignment(JTextField.RIGHT); // Alineación del texto a la derecha
+        pantalla.setFont(new Font("Arial", Font.PLAIN, 24)); // Fuente y tamaño del texto
+        pantalla.setBackground(Color.WHITE); // Color de fondo de la pantalla
+        pantalla.setPreferredSize(new Dimension(400, 50)); // Tamaño preferido de la pantalla
+        pantalla.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1)); // Borde de la pantalla
+        pantalla.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Espaciado interno de la pantalla
 
 
         //BOTONES:
-
         JButton botonPorcentaje = new JButton("%"); // Fila = 1, Columna = 1
         JButton botonCE = new JButton("CE"); // Fila = 1, Columna = 2
         JButton botonEliminarTodo = new JButton("C"); // Fila = 1, Columna = 3
@@ -61,8 +68,6 @@ public class CalculadoraVistaBasica extends JFrame{
 
 
         // CONFIGURACIÓN DE LOS BOTONES
-
-
         Dimension tamañoBoton = new Dimension(1, 1);
 
         //Botón suma +
@@ -120,8 +125,7 @@ public class CalculadoraVistaBasica extends JFrame{
          */
 
 
-        // ADICIÓN DE BOTONES AL PANEL
-
+        // ADICIÓN DE BOTONES Y PANTALLA AL PANEL
        // panel2.add(Box.createVerticalStrut(100));  //Para establecer un espacio vertical definido (100 píxeles en este caso)
 
         panel2.add(botonPorcentaje);
@@ -154,7 +158,11 @@ public class CalculadoraVistaBasica extends JFrame{
         panel2.add(botonPunto);
         panel2.add(botonIgual);
 
+
+
+
         // ADICIÓN DEL PANEL PRINCIPAL AL FRAME
+        frameBasico.add(pantalla, BorderLayout.NORTH); // Añade la pantalla arriba de los botones
         frameBasico.add(panel2, BorderLayout.CENTER);
     }
 
