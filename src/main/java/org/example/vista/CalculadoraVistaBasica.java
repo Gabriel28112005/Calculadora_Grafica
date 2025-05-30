@@ -3,6 +3,8 @@ package org.example.vista;
 import javax.swing.*;
 import java.awt.*;
 
+
+
 public class CalculadoraVistaBasica extends JFrame{
 
     public CalculadoraVistaBasica(){
@@ -72,12 +74,13 @@ public class CalculadoraVistaBasica extends JFrame{
 
         //Botón suma +
 
-        /*
+        botonSuma.addActionListener(e->{
+            String textoActual = pantalla.getText();
+            if (!textoActual.isEmpty()) {
+                pantalla.setText(textoActual + "+");
+            }
 
-        botonSuma.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        botonSuma.setMaximumSize(tamañoBoton);
-        botonSuma.setMinimumSize(tamañoBoton);
-        botonSuma.setPreferredSize(tamañoBoton);
+        }); //No funciona
 
 
         //Botón resta -
@@ -122,7 +125,7 @@ public class CalculadoraVistaBasica extends JFrame{
         botonIgual.setPreferredSize(tamañoBoton);
 
 
-         */
+
 
 
         // ADICIÓN DE BOTONES Y PANTALLA AL PANEL
