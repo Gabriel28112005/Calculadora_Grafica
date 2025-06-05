@@ -1,7 +1,9 @@
 package org.example;
 
+import org.example.vista.CalculadoraVistaGeneral;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello, World!");
+        CalculadoraVistaGeneral inicio = new CalculadoraVistaGeneral();
     }
 }

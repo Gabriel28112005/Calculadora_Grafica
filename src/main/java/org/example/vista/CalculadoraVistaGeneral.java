@@ -5,8 +5,8 @@ import java.awt.*;
 
 import org.example.vista.CalculadoraVistaBasica;
 
-public class CalculadoraVistaGeneral {
-    public static void main(String[] ars){
+public class CalculadoraVistaGeneral extends JFrame {
+    public CalculadoraVistaGeneral(){
         JFrame frame = new JFrame("Calculadora");
         frame.setSize(400, 400);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

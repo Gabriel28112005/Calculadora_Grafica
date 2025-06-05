@@ -3,17 +3,9 @@ package org.example.vista;
 import javax.swing.*;
 import java.awt.*;
 
-import javax.script.ScriptEngineManager;
-import javax.script.ScriptEngine;
-import javax.script.ScriptException;
-
-
 import org.example.modelo.CalculadoraModeloBasica;
 
-
-
 public class CalculadoraVistaBasica extends JFrame{
-
     public CalculadoraVistaBasica(){
 
         // FRAMES
