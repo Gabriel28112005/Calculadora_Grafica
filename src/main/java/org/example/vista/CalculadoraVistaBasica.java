@@ -72,13 +72,72 @@ public class CalculadoraVistaBasica extends JFrame{
         // CONFIGURACIÓN DE LOS BOTONES
         Dimension tamañoBoton = new Dimension(1, 1);
 
+
+        //Escritura de botones
+        String botones[]= {
+                "%", "CE", "C", "⌫",
+                "1/x", "x²", "√x", "÷",
+                "7", "8", "9", "x",
+                "4", "5", "6", "-",
+                "1", "2", "3", "+",
+                "+/-", "0", ".", "="
+        };
+
+        for(String Seleccion : botones){
+            JButton botonSeleccion = new JButton(Seleccion);
+            panel2.add(botonSeleccion);
+
+            botonSeleccion.addActionListener(e->{
+                String textoActual = pantalla.getText();
+
+                if(Seleccion.equals("%")){
+                    try{
+                        double NumeroActual = Double.parseDouble(textoActual); // Convierte el texto actual de la pantalla a un número.
+                        double porcentaje = NumeroActual / 100; // Calcula el porcentaje del número actual.
+                        pantalla.setText(String.valueOf(porcentaje)); // Actualiza la pantalla con el resultado del porcentaje.
+
+                    }catch(Exception CualquierCosa) {
+                        //JOptionPane.showMessageDialog(null, "Error al calcular el porcentaje", "Error", JOptionPane.ERROR_MESSAGE);
+                        pantalla.setText("Syntax Error"); // Si hay un error al convertir el texto a número, se muestra "Error" en la pantalla.
+                    }
+                }
+
+                else if(Seleccion.equals("C") || Seleccion.equals("CE")) {
+                    pantalla.setText(""); // Si el texto actual es "C", "CE" o "⌫", se limpia la pantalla.
+
+                }
+
+                else if(Seleccion.equals("⌫")){
+                    if(!textoActual.isEmpty()){
+                        String nuevoTexto = textoActual.substring(0, textoActual.length() - 1); // Elimina el último carácter del texto actual.
+                        pantalla.setText(nuevoTexto); // Actualiza la pantalla con el nuevo texto.
+                    }
+
+                }
+
+                else if(Seleccion.equals("=")) {
+                    pantalla.setText(Seleccion); // Si el texto actual es "=", se reemplaza por el nuevo botón presionado.
+
+                }
+
+                else {
+                    pantalla.setText(textoActual + Seleccion); // En cualquier otro caso, se agrega el botón presionado al texto actual.
+                }
+
+            });
+
+
+        } //Ahora escribe pero se ha modificado el orden del teclado
+
+
+
         //Botón suma +
 
+
+
+
         botonSuma.addActionListener(e->{
-            String textoActual = pantalla.getText();
-            if (!textoActual.isEmpty()) {
-                pantalla.setText(textoActual + "+");
-            }
+
 
         }); //No funciona
 
@@ -131,6 +190,7 @@ public class CalculadoraVistaBasica extends JFrame{
         // ADICIÓN DE BOTONES Y PANTALLA AL PANEL
        // panel2.add(Box.createVerticalStrut(100));  //Para establecer un espacio vertical definido (100 píxeles en este caso)
 
+        /*
         panel2.add(botonPorcentaje);
         panel2.add(botonCE);
         panel2.add(botonEliminarTodo);
@@ -160,6 +220,7 @@ public class CalculadoraVistaBasica extends JFrame{
         panel2.add(boton0);
         panel2.add(botonPunto);
         panel2.add(botonIgual);
+        */
 
 
 

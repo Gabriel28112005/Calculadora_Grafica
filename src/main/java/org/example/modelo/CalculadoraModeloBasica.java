@@ -29,4 +29,13 @@ public class CalculadoraModeloBasica {
     } //Fin de la función division
 
 
+    public static double potenciaCuadrada(double base, double exponente) {
+        return Math.pow(base, exponente);
+    } //Fin de la función potencia
+
+    public static double raizCuadrada(double numero) {
+        return Math.sqrt(numero);
+    } //Fin de la función raizCuadrada
+
+
 } //Fin de la clase CalculadoraModeloBasica
