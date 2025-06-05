@@ -32,15 +32,7 @@ public class CalculadoraVistaGeneral {
             frame.dispose(); // Cierra la ventana actual
             CalculadoraVistaBasica vistaBasica = new CalculadoraVistaBasica(); // Crea una nueva instancia de la vista básica
 
-
-
-
         });
-
-
-
-
-
 
 
         panel.add(Box.createVerticalStrut(10));

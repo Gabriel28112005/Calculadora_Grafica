@@ -3,6 +3,13 @@ package org.example.vista;
 import javax.swing.*;
 import java.awt.*;
 
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptEngine;
+import javax.script.ScriptException;
+
+
+import org.example.modelo.CalculadoraModeloBasica;
+
 
 
 public class CalculadoraVistaBasica extends JFrame{
@@ -35,44 +42,6 @@ public class CalculadoraVistaBasica extends JFrame{
         pantalla.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10)); // Espaciado interno de la pantalla
 
 
-        //BOTONES:
-        JButton botonPorcentaje = new JButton("%"); // Fila = 1, Columna = 1
-        JButton botonCE = new JButton("CE"); // Fila = 1, Columna = 2
-        JButton botonEliminarTodo = new JButton("C"); // Fila = 1, Columna = 3
-        JButton botonEliminarUno = new JButton("⌫"); // Fila = 1, Columna = 4
-
-        JButton botonInverso = new JButton("1/x"); // Fila = 2, Columna = 1
-        JButton botoncuadrado = new JButton("x²"); // Fila = 2, Columna = 2
-        JButton botonRaizCuadrada = new JButton("√x"); // Fila = 2, Columna = 3
-        JButton botonDivision = new JButton("÷"); // Fila = 2, Columna = 4
-
-        JButton boton7 = new JButton("7"); // Fila = 3, Columna = 1
-        JButton boton8 = new JButton("8"); // Fila = 3, Columna = 2
-        JButton boton9 = new JButton("9"); // Fila = 3, Columna = 3
-        JButton botonMultiplicacion = new JButton("x"); // Fila = 3, Columna = 4
-
-        JButton boton4 = new JButton("4"); // Fila = 4, Columna = 1
-        JButton boton5 = new JButton("5"); // Fila = 4, Columna = 2
-        JButton boton6 = new JButton("6"); // Fila = 4, Columna = 3
-        JButton botonResta = new JButton("-"); // Fila = 4, Columna = 4
-
-        JButton boton1 = new JButton("1"); // Fila = 5, Columna = 1
-        JButton boton2 = new JButton("2"); // Fila = 5, Columna = 2
-        JButton boton3 = new JButton("3"); // Fila = 5, Columna = 3
-        JButton botonSuma = new JButton("+"); // Fila = 5, Columna = 4
-
-        JButton botonSigno = new JButton("+/-"); // Fila = 6, Columna = 1
-        JButton boton0 = new JButton("0"); // Fila = 6, Columna = 2
-        JButton botonPunto = new JButton("."); // Fila = 6, Columna = 3
-        JButton botonIgual = new JButton("="); // Fila = 6, Columna = 4
-
-
-
-
-        // CONFIGURACIÓN DE LOS BOTONES
-        Dimension tamañoBoton = new Dimension(1, 1);
-
-
         //Escritura de botones
         String botones[]= {
                 "%", "CE", "C", "⌫",
@@ -87,10 +56,13 @@ public class CalculadoraVistaBasica extends JFrame{
             JButton botonSeleccion = new JButton(Seleccion);
             panel2.add(botonSeleccion);
 
+            final String SeleccionFinal = Seleccion;
+
             botonSeleccion.addActionListener(e->{
+
                 String textoActual = pantalla.getText();
 
-                if(Seleccion.equals("%")){
+                if(SeleccionFinal.equals("%")){
                     try{
                         double NumeroActual = Double.parseDouble(textoActual); // Convierte el texto actual de la pantalla a un número.
                         double porcentaje = NumeroActual / 100; // Calcula el porcentaje del número actual.
@@ -100,128 +72,181 @@ public class CalculadoraVistaBasica extends JFrame{
                         //JOptionPane.showMessageDialog(null, "Error al calcular el porcentaje", "Error", JOptionPane.ERROR_MESSAGE);
                         pantalla.setText("Syntax Error"); // Si hay un error al convertir el texto a número, se muestra "Error" en la pantalla.
                     }
-                }
+                } //Fin del botón "%"
 
-                else if(Seleccion.equals("C") || Seleccion.equals("CE")) {
+
+                else if(SeleccionFinal.equals("CE") || SeleccionFinal.equals("C")) {
                     pantalla.setText(""); // Si el texto actual es "C", "CE" o "⌫", se limpia la pantalla.
+                } //Fin del botón "C", "CE"
 
-                }
 
-                else if(Seleccion.equals("⌫")){
+                else if(SeleccionFinal.equals("⌫")){
                     if(!textoActual.isEmpty()){
                         String nuevoTexto = textoActual.substring(0, textoActual.length() - 1); // Elimina el último carácter del texto actual.
                         pantalla.setText(nuevoTexto); // Actualiza la pantalla con el nuevo texto.
                     }
+                } //Fin del botón "⌫"
 
-                }
 
-                else if(Seleccion.equals("=")) {
-                    pantalla.setText(Seleccion); // Si el texto actual es "=", se reemplaza por el nuevo botón presionado.
+                else if(SeleccionFinal.equals("1/x")){
+                    try{
+                        double NumeroActual = Double.parseDouble(textoActual); // Convierte el texto actual de la pantalla a un número.
+                        double fraccion = 1 / NumeroActual; // Calcula el porcentaje del número actual.
 
-                }
+                        if(NumeroActual == 0) {
+                            pantalla.setText("∞"); // Si el número es cero, muestra "Error" en la pantalla.
+                        }
+
+                        else{
+                            if( fraccion % 1 == 0) {
+                                pantalla.setText(String.valueOf((int) fraccion)); // Si el resultado es un número entero, lo muestra como tal.
+                            } else {
+                                pantalla.setText(String.valueOf(fraccion)); // Si no, muestra el resultado como un número decimal.
+                            }
+                        }
+
+                    }catch(Exception CualquierCosa) {
+                        //JOptionPane.showMessageDialog(null, "Error al calcular el porcentaje", "Error", JOptionPane.ERROR_MESSAGE);
+                        pantalla.setText("Syntax Error"); // Si hay un error al convertir el texto a número, se muestra "Error" en la pantalla.
+                    }
+                } //Fin del botón "1/x"
+
+
+                else if(SeleccionFinal.equals("x²")){
+                    try{
+                        if(textoActual.contains(".")){
+                            Double NumeroActual = Double.parseDouble(textoActual); // Convierte el texto actual de la pantalla a un número.
+                            Double Cuadrado = Math.pow(NumeroActual,2); // Calcula el cuadrado del número actual.
+                            pantalla.setText(String.valueOf(Cuadrado)); // Actualiza la pantalla con el resultado del cuadrado.
+                        }
+                        else{
+                            Integer NumeroActual = Integer.parseInt(textoActual); // Convierte el texto actual de la pantalla a un número.
+                            Integer Cuadrado = NumeroActual * NumeroActual; // Calcula el cuadrado del número actual.
+                            pantalla.setText(String.valueOf(Cuadrado)); // Actualiza la pantalla con el resultado del cuadrado.
+                        }
+
+                    }catch(Exception CualquierCosa){
+                        pantalla.setText("Syntax Error"); // Si hay un error al convertir el texto a número, se muestra "Error" en la pantalla.
+
+                    }
+
+                } //Fin del botón "x²"
+
+
+                else if(SeleccionFinal.equals("√x")){
+                    try{
+                        double NumeroActual = Double.parseDouble(textoActual); // Convierte el texto actual de la pantalla a un número.
+                        double RaizCuadrada = Math.sqrt(NumeroActual); // Calcula el cuadrado del número actual.
+
+                        if (NumeroActual < 0) {
+                            pantalla.setText("Syntax Error"); // Si el número es negativo, muestra "Error" en la pantalla.
+                        }
+                        else if(RaizCuadrada == Math.floor(RaizCuadrada)) { // Verifica si la raíz cuadrada es un número entero.
+                            pantalla.setText(String.valueOf((int) RaizCuadrada)); // Actualiza la pantalla con el resultado del cuadrado.
+                        }
+                        else{
+                            pantalla.setText(String.valueOf(RaizCuadrada)); // Actualiza la pantalla con el resultado del cuadrado.
+                        }
+
+                    }catch(Exception CualquierCosa){
+                        pantalla.setText("Syntax Error"); // Si hay un error al convertir el texto a número, se muestra "Error" en la pantalla.
+
+                    }
+
+                } //Fin del botón "√x"
+
+
+                else if (SeleccionFinal.equals("+/-")){
+                    if(textoActual.contains("-")){
+                        pantalla.setText(textoActual.replace("-", "")); // Si el texto actual contiene un "-", se elimina.
+                    } else {
+                        pantalla.setText("-" + textoActual); // Si no, se agrega un "-" al inicio del texto actual.
+                    }
+
+                } //Fin del botón "+/-"
+
+                else if(SeleccionFinal.equals("=")) {
+
+                    try{
+                        if(textoActual.contains("+")){
+                            String[] partes = textoActual.split("\\+");
+                            double a = Double.parseDouble(partes[0]);
+                            double b = Double.parseDouble(partes[1]);
+                            double resultado = CalculadoraModeloBasica.suma(a, b);
+
+                            if(resultado == Math.floor(resultado)) {
+                                pantalla.setText(String.valueOf((int) resultado)); // Si el resultado es un número entero, lo muestra como tal.
+                            } else {
+                                pantalla.setText(String.valueOf(resultado)); // Si no, muestra el resultado como un número decimal.
+                            }
+                        } //Fin del caso en que la operación sea la suma de dos números
+
+                        else if (textoActual.contains("-")){
+                            String[] partes = textoActual.split("-");
+                            double a = Double.parseDouble(partes[0]);
+                            double b = Double.parseDouble(partes[1]);
+                            double resultado = CalculadoraModeloBasica.resta(a, b);
+
+                            if(resultado == Math.floor(resultado)) {
+                                pantalla.setText(String.valueOf((int) resultado)); // Si el resultado es un número entero, lo muestra como tal.
+                            } else {
+                                pantalla.setText(String.valueOf(resultado)); // Si no, muestra el resultado como un número decimal.
+                            }
+
+                        } //Fin del caso en el que la operación sea la resta de dos números
+
+
+                        else if (textoActual.contains("x")){
+                            String[] partes = textoActual.split("x");
+                            double a = Double.parseDouble(partes[0]);
+                            double b = Double.parseDouble(partes[1]);
+                            double resultado = CalculadoraModeloBasica.multiplicacion(a, b);
+
+                            if(resultado == Math.floor(resultado)) {
+                                pantalla.setText(String.valueOf((int) resultado)); // Si el resultado es un número entero, lo muestra como tal.
+                            } else {
+                                pantalla.setText(String.valueOf(resultado)); // Si no, muestra el resultado como un número decimal.
+                            }
+
+                        } //Fin del caso en el que la operación sea la multiplicación de dos números
+
+
+                        else if (textoActual.contains("÷")){
+                            String[] partes = textoActual.split("÷");
+                            double a = Double.parseDouble(partes[0]);
+                            double b = Double.parseDouble(partes[1]);
+                            double resultado = CalculadoraModeloBasica.division(a, b);
+
+                            if(resultado == Math.floor(resultado)) {
+                                pantalla.setText(String.valueOf((int) resultado)); // Si el resultado es un número entero, lo muestra como tal.
+                            } else {
+                                pantalla.setText(String.valueOf(resultado)); // Si no, muestra el resultado como un número decimal.
+                            }
+
+                        } //Fin del caso en el que la operación sea la división de dos números
+
+
+                        else {
+                            pantalla.setText(textoActual); // Si no hay ningún operador, se muestra el texto actual.
+                        }
+                    }catch (Exception ex){
+                        JOptionPane.showMessageDialog(null, "La calculadora únicamente puede realizar operaciones básicas (suma, resta, multiplicación o división) con dos números. Por favor, vuelva a intentarlo.", "Error en la operación", JOptionPane.WARNING_MESSAGE);
+                    }
+
+
+
+
+                } //Fin del botón "="
 
                 else {
-                    pantalla.setText(textoActual + Seleccion); // En cualquier otro caso, se agrega el botón presionado al texto actual.
-                }
+                    pantalla.setText(textoActual + SeleccionFinal); // En cualquier otro caso, se agrega el botón presionado al texto actual.
+
+                } //Imprime en la pantalla tanto números como los botones "+", "-", "x", "÷" y "."
 
             });
 
 
-        } //Ahora escribe pero se ha modificado el orden del teclado
-
-
-
-        //Botón suma +
-
-
-
-
-        botonSuma.addActionListener(e->{
-
-
-        }); //No funciona
-
-
-        //Botón resta -
-        //botonResta.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        botonResta.setMaximumSize(tamañoBoton);
-        botonResta.setMinimumSize(tamañoBoton);
-        botonResta.setPreferredSize(tamañoBoton);
-
-
-        //Botón multiplicación x
-        //botonMultiplicacion.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        botonMultiplicacion.setMaximumSize(tamañoBoton);
-        botonMultiplicacion.setMinimumSize(tamañoBoton);
-        botonMultiplicacion.setPreferredSize(tamañoBoton);
-
-
-        //Botón división ÷
-        //botonDivision.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        botonDivision.setMaximumSize(tamañoBoton);
-        botonDivision.setMinimumSize(tamañoBoton);
-        botonDivision.setPreferredSize(tamañoBoton);
-
-
-        //Botón eliminar todo C
-        //botonEliminarTodo.setAlignmentX(Component.);
-        botonEliminarTodo.setMaximumSize(tamañoBoton);
-        botonEliminarTodo.setMinimumSize(tamañoBoton);
-        botonEliminarTodo.setPreferredSize(tamañoBoton);
-
-
-        //Botón eliminar uno ⌫
-        //botonEliminarUno.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        botonEliminarUno.setMaximumSize(tamañoBoton);
-        botonEliminarUno.setMinimumSize(tamañoBoton);
-        botonEliminarUno.setPreferredSize(tamañoBoton);
-
-
-        //Botón igual =
-        //botonIgual.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        botonIgual.setMaximumSize(tamañoBoton);
-        botonIgual.setMinimumSize(tamañoBoton);
-        botonIgual.setPreferredSize(tamañoBoton);
-
-
-
-
-
-        // ADICIÓN DE BOTONES Y PANTALLA AL PANEL
-       // panel2.add(Box.createVerticalStrut(100));  //Para establecer un espacio vertical definido (100 píxeles en este caso)
-
-        /*
-        panel2.add(botonPorcentaje);
-        panel2.add(botonCE);
-        panel2.add(botonEliminarTodo);
-        panel2.add(botonEliminarUno);
-
-        panel2.add(botonInverso);
-        panel2.add(botoncuadrado);
-        panel2.add(botonRaizCuadrada);
-        panel2.add(botonDivision);
-
-        panel2.add(boton7);
-        panel2.add(boton8);
-        panel2.add(boton9);
-        panel2.add(botonMultiplicacion);
-
-        panel2.add(boton4);
-        panel2.add(boton5);
-        panel2.add(boton6);
-        panel2.add(botonResta);
-
-        panel2.add(boton1);
-        panel2.add(boton2);
-        panel2.add(boton3);
-        panel2.add(botonSuma);
-
-        panel2.add(botonSigno);
-        panel2.add(boton0);
-        panel2.add(botonPunto);
-        panel2.add(botonIgual);
-        */
-
+        }
 
 
 
