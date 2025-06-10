@@ -17,10 +17,8 @@ public class CalculadoraVistaBasica extends JFrame{
 
 
         // PANELES
-        JPanel panel1 = new JPanel();
-        panel1.setLayout(new BoxLayout(panel1, BoxLayout.Y_AXIS));
 
-        JPanel panel2 = new JPanel(new GridLayout(6, 4, 5,5));
+        JPanel panel = new JPanel(new GridLayout(6, 4, 5,5));
 
 
         // CREACIÓN DE LA PANTALLA DONDE SE REFLEJAN LAS OPERACIONES
@@ -46,7 +44,7 @@ public class CalculadoraVistaBasica extends JFrame{
 
         for(String Seleccion : botones){
             JButton botonSeleccion = new JButton(Seleccion);
-            panel2.add(botonSeleccion);
+            panel.add(botonSeleccion);
 
             final String SeleccionFinal = Seleccion;
 
@@ -60,6 +58,8 @@ public class CalculadoraVistaBasica extends JFrame{
                         double porcentaje = NumeroActual / 100; // Calcula el porcentaje del número actual.
                         pantalla.setText(String.valueOf(porcentaje)); // Actualiza la pantalla con el resultado del porcentaje.
 
+
+
                     }catch(Exception CualquierCosa) {
                         //JOptionPane.showMessageDialog(null, "Error al calcular el porcentaje", "Error", JOptionPane.ERROR_MESSAGE);
                         pantalla.setText("Syntax Error"); // Si hay un error al convertir el texto a número, se muestra "Error" en la pantalla.
@@ -68,7 +68,7 @@ public class CalculadoraVistaBasica extends JFrame{
 
 
                 else if(SeleccionFinal.equals("CE") || SeleccionFinal.equals("C")) {
-                    pantalla.setText(""); // Si el texto actual es "C", "CE" o "⌫", se limpia la pantalla.
+                    pantalla.setText(""); // Si el texto actual es "C" o "CE", se limpia la pantalla.
                 } //Fin del botón "C", "CE"
 
 
@@ -158,7 +158,6 @@ public class CalculadoraVistaBasica extends JFrame{
                 } //Fin del botón "+/-"
 
                 else if(SeleccionFinal.equals("=")) {
-
                     try{
                         if(textoActual.contains("+")){
                             String[] partes = textoActual.split("\\+");
@@ -244,7 +243,7 @@ public class CalculadoraVistaBasica extends JFrame{
 
         // ADICIÓN DEL PANEL PRINCIPAL AL FRAME
         frameBasico.add(pantalla, BorderLayout.NORTH); // Añade la pantalla arriba de los botones
-        frameBasico.add(panel2, BorderLayout.CENTER);
+        frameBasico.add(panel, BorderLayout.CENTER);
     }
 
 

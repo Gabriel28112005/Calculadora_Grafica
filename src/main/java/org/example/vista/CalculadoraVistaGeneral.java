@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 import org.example.vista.CalculadoraVistaBasica;
+import org.example.vista.CalculadoraVistaMatriz2;
+import org.example.vista.CalculadoraVistaMatriz3;
 
 public class CalculadoraVistaGeneral extends JFrame {
     public CalculadoraVistaGeneral(){
@@ -32,6 +34,18 @@ public class CalculadoraVistaGeneral extends JFrame {
             frame.dispose(); // Cierra la ventana actual
             CalculadoraVistaBasica vistaBasica = new CalculadoraVistaBasica(); // Crea una nueva instancia de la vista básica
 
+        });
+
+
+        botonMatriz2.addActionListener(e->{
+            frame.dispose();
+            //JOptionPane.showMessageDialog(null, "Calculadora no disponible actualemnte", "Error", JOptionPane.WARNING_MESSAGE);
+            CalculadoraVistaMatriz2 vistaMatriz2 = new CalculadoraVistaMatriz2(); // Crea una nueva instancia de la vista de matriz 2x2
+        });
+
+        botonMatriz3.addActionListener(e->{
+            //frame.dispose();
+            JOptionPane.showMessageDialog(null, "Calculadora no disponible actualemnte", "Error", JOptionPane.WARNING_MESSAGE);
         });
 
 
