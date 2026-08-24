@@ -208,11 +208,13 @@ public class CalculadoraVistaBasica extends JFrame{
                             double b = Double.parseDouble(partes[1]);
                             double resultado = CalculadoraModeloBasica.division(a, b);
 
-                            if(resultado == Math.floor(resultado)) {
-                                pantalla.setText(String.valueOf((int) resultado)); // Si el resultado es un número entero, lo muestra como tal.
+                            if(a%b == 0) {
+                                pantalla.setText(String.valueOf((int) resultado)); // Si a|b -> r=0 luego "resultado" es entero
                             } else {
-                                pantalla.setText(String.valueOf(resultado)); // Si no, muestra el resultado como un número decimal.
+                                pantalla.setText(Double.toString(resultado)); // Si no, muestra el resultado como un número decimal.
                             }
+
+
 
                         } //Fin del caso en el que la operación sea la división de dos números
 
@@ -222,6 +224,12 @@ public class CalculadoraVistaBasica extends JFrame{
                         }
                     }catch (Exception ex){
                         JOptionPane.showMessageDialog(null, "La calculadora únicamente puede realizar operaciones básicas (suma, resta, multiplicación o división) con dos números. Por favor, vuelva a intentarlo.", "Error en la operación", JOptionPane.WARNING_MESSAGE);
+                    }
+
+
+                    if(textoActual.contains(".")){
+                        double NumeroActual = Double.parseDouble(textoActual); // Convierte el texto actual de la pantalla a un número.
+                        CalculadoraModeloBasica.DecimalAEntero(NumeroActual); // Convierte el número decimal a fracción y lo muestra en la pantalla.
                     }
 
 

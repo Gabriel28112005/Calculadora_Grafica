@@ -45,7 +45,7 @@ public class CalculadoraVistaGeneral extends JFrame {
 
         botonMatriz3.addActionListener(e->{
             //frame.dispose();
-            JOptionPane.showMessageDialog(null, "Calculadora no disponible actualemnte", "Error", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Calculadora no disponible actualmente", "Error", JOptionPane.WARNING_MESSAGE);
         });
 
 
