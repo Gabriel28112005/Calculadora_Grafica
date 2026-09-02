@@ -33,7 +33,7 @@ public class CalculadoraVistaBasica extends JFrame{
 
 
         //Escritura de botones
-        String botones[]= {
+        String[] botones= {
                 "%", "CE", "C", "⌫",
                 "1/x", "x²", "√x", "÷",
                 "7", "8", "9", "x",
