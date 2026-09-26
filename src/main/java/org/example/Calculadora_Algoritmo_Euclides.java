@@ -1,14 +1,9 @@
 package org.example;
 
 import java.util.Scanner;
-import java.util.*;
 
-public class asknlask {
+public class Calculadora_Algoritmo_Euclides {
     public static void main(String[] args) {
-
-
-
-
             Scanner scanner = new Scanner(System.in);
 
             System.out.println("Vamos a realizar el algoritmo de Euclides");
@@ -41,8 +36,7 @@ public class asknlask {
 
             System.out.println(Valor_R(A,B,Valor_C(A,B))+"           "+Valor_C(A,B));
 
-
-
+            scanner.close();
     }
 
     public static int Valor_C (int A, int B){
